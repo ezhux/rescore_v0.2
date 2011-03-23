@@ -3,6 +3,10 @@ Paleidimas:
 - instaliuoti Maven (http://maven.apache.org/download.html) arba tiesiog "sudo apt-get install maven2"
 - mvn clean compile exec:java -Dexec.mainClass=org.rescore.App -e
 
+Testų paleidimas:
+
+- mvn test
+
 Atkreipti dėmesį į failus:
 
 - pom.xml (maven project failas, ten surašyti dependencies)
