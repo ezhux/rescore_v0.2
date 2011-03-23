@@ -5,7 +5,7 @@ Paleidimas:
 - mvn clean compile exec:java -Dexec.mainClass=org.rescore.App -e
 
 Testų paleidimas:
-- sukurti DB pavadinimu "db_for_test"; sukurti struktūrą kaip faile sql/create.sql
+- sukurti DB pavadinimu "db_for_test"; sukurti struktūrą kaip faile sql/create.sql; importuoti modelių duomenis; įrašyti ką nors į laukus (pvz. waterlineLength), kurie dabar yra tušti, bet DB struktūra reikalauja reikšmių; 
 - mvn test
 
 Atkreipti dėmesį į failus:
