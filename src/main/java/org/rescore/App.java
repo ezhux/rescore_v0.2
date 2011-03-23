@@ -10,17 +10,13 @@ import org.rescore.domain.Yacht;
 import org.rescore.domain.YachtClass;
 import org.rescore.persitence.HibernateUtil;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
 	static Logger logger = Logger.getLogger(App.class);
 	
     public static void main( String[] args )
     {
-    	Session session = HibernateUtil.getSessionFactory().openSession();
+    	Session session = HibernateUtil.getSessionFactory("dev").openSession();
     	session.beginTransaction();
     	
     	List<YachtClass> yachtClasses = session.createQuery("from YachtClass").list();
@@ -39,8 +35,8 @@ public class App
     	
     	Yacht newYacht = new Yacht();
     	newYacht.setId(1);
-    	newYacht.setName("myName2");
-    	newYacht.setSailNumber("LTU111");
+    	newYacht.setName("myName21");
+    	newYacht.setSailNumber("LTU112");
     	newYacht.setYachtClass(yachtClass);
     	System.out.println("....done....");
     	session.save(newYacht);
