@@ -9,23 +9,19 @@ import org.rescore.App;
 public class HibernateUtil {
 	static Logger logger = Logger.getLogger(HibernateUtil.class);
 	//factory for development
-	private static final SessionFactory dev_sessionFactory = buildSessionFactory("dev"); 
+	private static final SessionFactory dev_sessionFactory = (new HibernateUtil()). buildSessionFactory("dev"); 
 	//factory for test
-	private static final SessionFactory test_sessionFactory = buildSessionFactory("test"); 
+	private static final SessionFactory test_sessionFactory = (new HibernateUtil()).buildSessionFactory("test"); 
 	
-    private static SessionFactory buildSessionFactory(String environment) {
+    private SessionFactory buildSessionFactory(String environment) {
         try {
-        	System.out.println("enviro: " + environment);
-        	System.out.println("xxx_____create factories");
             // Create the SessionFactory from hibernate.cfg.xml
         	AnnotationConfiguration cfg = new AnnotationConfiguration().configure();
         	// create two separate databases: one for development
         	if (environment == "dev"){
-        		System.out.println("dev enviro");
         		cfg.setProperty("hibernate.connection.url", "jdbc:h2:~/test;AUTO_SERVER=TRUE");
         	// another - for testing
         	} else if(environment == "test"){
-        		System.out.println("test enviro");
         		cfg.setProperty("hibernate.connection.url", "jdbc:h2:~/db_for_test;AUTO_SERVER=TRUE");
         	}
         	logger.info("sessionFactory created");
