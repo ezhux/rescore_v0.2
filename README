@@ -1,10 +1,11 @@
 Paleidimas:
 
 - instaliuoti Maven (http://maven.apache.org/download.html) arba tiesiog "sudo apt-get install maven2"
+- sukurti DB pavadinimu "test"; sukurti struktūrą, kaip faile sql/create.sql
 - mvn clean compile exec:java -Dexec.mainClass=org.rescore.App -e
 
 Testų paleidimas:
-
+- sukurti DB pavadinimu "db_for_test"; sukurti struktūrą kaip faile sql/create.sql
 - mvn test
 
 Atkreipti dėmesį į failus:
