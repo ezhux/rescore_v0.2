@@ -34,6 +34,10 @@ public class HibernateUtil {
         }
     }
  
+    public static SessionFactory getSessionFactory(){
+    	return dev_sessionFactory;
+    }
+    
     public static SessionFactory getSessionFactory(String environment) {
     	if (environment == "dev"){
     		return dev_sessionFactory;

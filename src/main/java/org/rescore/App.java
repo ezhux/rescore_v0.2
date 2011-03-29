@@ -7,16 +7,16 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
+import org.rescore.dao.DAOFactory;
+import org.rescore.dao.HibernateDAOFactory;
+import org.rescore.dao.YachtClassDAO;
+import org.rescore.dao.YachtDAO;
+import org.rescore.dao.HibernateDAOFactory.YachtClassDAOHibernate;
+import org.rescore.dao.HibernateDAOFactory.YachtDAOHibernate;
 import org.rescore.domain.Yacht;
 import org.rescore.domain.YachtClass;
 import org.rescore.persitence.HibernateUtil;
 
-import dao.DAOFactory;
-import dao.HibernateDAOFactory;
-import dao.YachtClassDAO;
-import dao.YachtDAO;
-import dao.HibernateDAOFactory.YachtClassDAOHibernate;
-import dao.HibernateDAOFactory.YachtDAOHibernate;
 
 public class App 
 {
@@ -25,7 +25,7 @@ public class App
     public static void main( String[] args )
     {
 
-    	HibernateUtil.getSessionFactory("dev").getCurrentSession().beginTransaction();
+    	HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
     	
     	DAOFactory factory = DAOFactory.instance(DAOFactory.HIBERNATE);
     	YachtDAO yachtDAO = factory.getYachtDAO();
@@ -46,7 +46,7 @@ public class App
     		System.out.println(e.getMessage());
     	} finally {
     		try {
-    			HibernateUtil.getSessionFactory("dev").getCurrentSession().getTransaction().commit();
+    			HibernateUtil.getSessionFactory().getCurrentSession().getTransaction().commit();
     		} catch (HibernateException he){
     			logger.error(he);
     		}
