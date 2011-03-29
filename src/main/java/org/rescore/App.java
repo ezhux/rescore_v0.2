@@ -3,6 +3,7 @@ package org.rescore;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
@@ -10,37 +11,46 @@ import org.rescore.domain.Yacht;
 import org.rescore.domain.YachtClass;
 import org.rescore.persitence.HibernateUtil;
 
+import dao.DAOFactory;
+import dao.HibernateDAOFactory;
+import dao.YachtClassDAO;
+import dao.YachtDAO;
+import dao.HibernateDAOFactory.YachtClassDAOHibernate;
+import dao.HibernateDAOFactory.YachtDAOHibernate;
+
 public class App 
 {
 	static Logger logger = Logger.getLogger(App.class);
 	
     public static void main( String[] args )
     {
-    	Session session = HibernateUtil.getSessionFactory("dev").openSession();
-    	session.beginTransaction();
+
+    	HibernateUtil.getSessionFactory("dev").getCurrentSession().beginTransaction();
     	
-    	List<YachtClass> yachtClasses = session.createQuery("from YachtClass").list();
-    	YachtClass yachtClass = yachtClasses.get(1);
+    	DAOFactory factory = DAOFactory.instance(DAOFactory.HIBERNATE);
+    	YachtDAO yachtDAO = factory.getYachtDAO();
+    	YachtClassDAO yachtClassDAO = factory.getYachtClassDAO();
     	
-//    	newYachtClass.setCoefficient(1f);
-//    	newYachtClass.setName("model1");
-//    	newYachtClass.setProjectYear(2005);
-//    	newYachtClass.setLength(9999);
-//    	newYachtClass.setWidth(4999);
-//    	newYachtClass.setDisplacement(90000);
-//    	newYachtClass.setWaterlineLength(9999);
-//    	newYachtClass.setSailAreaDownwind(9999);
-//    	newYachtClass.setSailAreaUpwind(9999);
-//    	session.save(newYachtClass);
+    	Yacht yacht = new Yacht();
+    	yacht.setName("brandNewYacht");
+    	yacht.setSailNumber("LTU113");
+    	yacht.setBuildYear(2000);
+    	yacht.setCaptain("manoKapitonas");
     	
-    	Yacht newYacht = new Yacht();
-    	newYacht.setId(1);
-    	newYacht.setName("myName21");
-    	newYacht.setSailNumber("LTU112");
-    	newYacht.setYachtClass(yachtClass);
-    	System.out.println("....done....");
-    	session.save(newYacht);
-    	session.getTransaction().commit();
+    	List<YachtClass> yachtClasses = yachtClassDAO.findAll();
+    	
+    	yacht.setYachtClass(yachtClasses.get(0));
+    	try {
+    		yachtDAO.makePersistent(yacht);
+    	} catch (Exception e){
+    		System.out.println(e.getMessage());
+    	} finally {
+    		try {
+    			HibernateUtil.getSessionFactory("dev").getCurrentSession().getTransaction().commit();
+    		} catch (HibernateException he){
+    			logger.error(he);
+    		}
+    	}
     }
 }
 
