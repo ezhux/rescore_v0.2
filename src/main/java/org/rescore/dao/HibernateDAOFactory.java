@@ -1,4 +1,4 @@
-package dao;
+package org.rescore.dao;
 
 import org.hibernate.Session;
 import org.rescore.domain.Yacht;
@@ -26,7 +26,7 @@ public class HibernateDAOFactory extends DAOFactory {
     }
  
     protected Session getCurrentSession() {
-        return HibernateUtil.getSessionFactory("dev").getCurrentSession();
+        return HibernateUtil.getSessionFactory().getCurrentSession();
     }
  
     // Inline concrete DAO implementations with no business-related data access methods.

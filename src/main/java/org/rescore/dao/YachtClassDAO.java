@@ -1,4 +1,4 @@
-package dao;
+package org.rescore.dao;
 
 import org.rescore.domain.YachtClass;
 

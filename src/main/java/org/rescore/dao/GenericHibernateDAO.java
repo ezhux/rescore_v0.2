@@ -1,4 +1,4 @@
-package dao;
+package org.rescore.dao;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
