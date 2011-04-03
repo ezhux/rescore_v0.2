@@ -52,7 +52,8 @@ public class YachtTableModel extends AbstractTableModel {
     }
 
     public Class getColumnClass(int c) {
-        return getValueAt(0, c).getClass();
+    	Object value = getValueAt(0, c);
+    	return (value==null?Object.class:value.getClass());  
     }
 
 }
