@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import org.hibernate.SessionFactory;
+import org.rescore.beans.YachtClass;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -141,8 +142,8 @@ public class MainWindow implements ActionListener {
 	 }
 
 	 private void addNewYachtClassActionPerformed(ActionEvent ae){
-		    AddYachtClassDialog aycDialog = new AddYachtClassDialog();
-		    aycDialog.okButton.addActionListener(this);
+		 	YachtClass newYachtClass = new YachtClass();
+		    AddYachtClassDialog aycDialog = new AddYachtClassDialog(newYachtClass);
 		    aycDialog.setVisible(true);
 		 }
 	 

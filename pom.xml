@@ -8,10 +8,18 @@
   <packaging>jar</packaging>
 
 	<repositories>
+	
     	<repository>
       		<id>Maven repository</id>
       		<url>http://mvnrepository.com</url>
     	</repository>
+    	
+    	  <!-- for beansbinding -->
+ 		<repository>
+   			<id>jboss</id>
+   			<url>https://repository.jboss.org/nexus/content/groups/public/</url>
+  	</repository>
+  	
   </repositories>
 
   <name>rescore_v2</name>
@@ -79,6 +87,12 @@
 	    <groupId>org.slf4j</groupId>
 	    <artifactId>slf4j-log4j12</artifactId>
 	    <version>1.5.2</version>
+	</dependency>
+  
+	<dependency>
+  		<groupId>org.jdesktop</groupId>
+  		<artifactId>beansbinding</artifactId>
+  		<version>1.2.1</version>
 	</dependency>
   
 	<dependency>

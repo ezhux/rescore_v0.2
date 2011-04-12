@@ -1,10 +1,8 @@
 package org.rescore.gui.views;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -14,20 +12,27 @@ import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import org.rescore.domain.YachtClass;
+import org.rescore.beans.YachtClass;
 
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import org.jdesktop.beansbinding.BeanProperty;
+import org.jdesktop.beansbinding.ObjectProperty;
+import org.jdesktop.beansbinding.AutoBinding;
+import org.jdesktop.beansbinding.Bindings;
+import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 
 public class AddYachtClassDialog extends JDialog {
 	
+	private YachtClass m_yachtClass;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
 	private JTextField textField_1;
 	public JButton okButton;
 	
-	public AddYachtClassDialog(){
+	public AddYachtClassDialog(YachtClass yachtClass){
+		m_yachtClass = yachtClass;
 		setBounds(150, 150, 500, 400);
 		setTitle("Add New Yacht Class");
 		getContentPane().setLayout(new BorderLayout());
@@ -86,7 +91,7 @@ public class AddYachtClassDialog extends JDialog {
 				okButton.setActionCommand("OK");
 				okButton.addActionListener(new ActionListener() {
 			            public void actionPerformed(ActionEvent ae) {
-			            	addNewYachtClassActionPerformed(ae);
+			            	setVisible(false);
 			            }
 			        });
 				buttonPane.add(okButton);
@@ -96,21 +101,14 @@ public class AddYachtClassDialog extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 		            public void actionPerformed(ActionEvent ae) {
-		            	cancelActionPerformed(ae);
+		            	setVisible(false);
 		            }
 		        });
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
 		}
-	}
-	
-	private void addNewYachtClassActionPerformed(ActionEvent ea){
-		//YachtClass newYachtClass = YachtClass.create(getTextField().getText(), Float.valueOf(getTextField_1().getText()), 0, 0, 0, 0, 0, 0, 0, null);
-	}
-	
-	private void cancelActionPerformed(ActionEvent ea){
-		setVisible(false);
+		initDataBindings();
 	}
 	
 	public JTextField getTextField() {
@@ -127,5 +125,16 @@ public class AddYachtClassDialog extends JDialog {
 
 	public void setTextField_1(JTextField textField_1) {
 		this.textField_1 = textField_1;
+	}
+	protected void initDataBindings() {
+		BeanProperty<YachtClass, String> yachtClassBeanProperty = BeanProperty.create("name");
+		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty.create("text");
+		AutoBinding<YachtClass, String, JTextField, String> autoBinding = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, m_yachtClass, yachtClassBeanProperty, textField, jTextFieldBeanProperty);
+		autoBinding.bind();
+		//
+		BeanProperty<YachtClass, Float> yachtClassBeanProperty_1 = BeanProperty.create("coefficient");
+		BeanProperty<JTextField, String> jTextFieldBeanProperty_1 = BeanProperty.create("text");
+		AutoBinding<YachtClass, Float, JTextField, String> autoBinding_1 = Bindings.createAutoBinding(UpdateStrategy.READ, m_yachtClass, yachtClassBeanProperty_1, textField_1, jTextFieldBeanProperty_1);
+		autoBinding_1.bind();
 	}
 }

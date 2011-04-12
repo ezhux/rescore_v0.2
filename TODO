@@ -4,3 +4,5 @@ Duombazės kūrimas ir siuntimas į serverį (sukurti laukus ir trigerius eiluč
 Sukurti jachtų ir k. t. paieškos galimybės
 Grafinė sąsaja
 etc.
+
+pipe exceptions from data layer to GUI
