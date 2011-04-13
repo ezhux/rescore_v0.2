@@ -30,6 +30,7 @@ public class AddYachtClassDialog extends JDialog {
 	private JTextField textField;
 	private JTextField textField_1;
 	public JButton okButton;
+	private JTextField textField_2;
 	
 	public AddYachtClassDialog(YachtClass yachtClass){
 		m_yachtClass = yachtClass;
@@ -83,6 +84,24 @@ public class AddYachtClassDialog extends JDialog {
 			textField_1.setColumns(10);
 		}
 		{
+			JLabel lblDisplacement = new JLabel("Displacement:");
+			GridBagConstraints gbc_lblDisplacement = new GridBagConstraints();
+			gbc_lblDisplacement.insets = new Insets(0, 0, 5, 5);
+			gbc_lblDisplacement.gridx = 1;
+			gbc_lblDisplacement.gridy = 3;
+			contentPanel.add(lblDisplacement, gbc_lblDisplacement);
+		}
+		{
+			textField_2 = new JTextField();
+			GridBagConstraints gbc_textField_2 = new GridBagConstraints();
+			gbc_textField_2.insets = new Insets(0, 0, 5, 0);
+			gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
+			gbc_textField_2.gridx = 3;
+			gbc_textField_2.gridy = 3;
+			contentPanel.add(textField_2, gbc_textField_2);
+			textField_2.setColumns(10);
+		}
+		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
@@ -134,7 +153,12 @@ public class AddYachtClassDialog extends JDialog {
 		//
 		BeanProperty<YachtClass, Float> yachtClassBeanProperty_1 = BeanProperty.create("coefficient");
 		BeanProperty<JTextField, String> jTextFieldBeanProperty_1 = BeanProperty.create("text");
-		AutoBinding<YachtClass, Float, JTextField, String> autoBinding_1 = Bindings.createAutoBinding(UpdateStrategy.READ, m_yachtClass, yachtClassBeanProperty_1, textField_1, jTextFieldBeanProperty_1);
+		AutoBinding<YachtClass, Float, JTextField, String> autoBinding_1 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, m_yachtClass, yachtClassBeanProperty_1, textField_1, jTextFieldBeanProperty_1);
 		autoBinding_1.bind();
+		//
+		BeanProperty<YachtClass, Integer> yachtClassBeanProperty_2 = BeanProperty.create("displacement");
+		BeanProperty<JTextField, String> jTextFieldBeanProperty_2 = BeanProperty.create("text");
+		AutoBinding<YachtClass, Integer, JTextField, String> autoBinding_2 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, m_yachtClass, yachtClassBeanProperty_2, textField_2, jTextFieldBeanProperty_2);
+		autoBinding_2.bind();
 	}
 }
