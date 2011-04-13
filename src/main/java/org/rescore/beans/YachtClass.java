@@ -36,7 +36,6 @@ public class YachtClass extends AbstractModelObject {
 	public void setName(String name) {
 		String oldValue = this.name;
 		this.name = name;
-		System.out.println("setting name");
 		firePropertyChange("name", oldValue, name);
 	}
 	
@@ -57,7 +56,6 @@ public class YachtClass extends AbstractModelObject {
 	public void setCoefficient(float coefficient) {
 		float oldValue = this.coefficient;
 		this.coefficient = coefficient;
-		System.out.println("setting coefficient");
 		firePropertyChange("coefficient", oldValue, coefficient);
 	}
 	
