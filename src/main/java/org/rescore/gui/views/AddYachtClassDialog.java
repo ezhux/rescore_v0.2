@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 import org.rescore.beans.YachtClass;
 import org.rescore.beans.YachtClasses;
+import org.rescore.framework.PersistenceController;
 
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -24,8 +25,9 @@ import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.beansbinding.Bindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 
-public class AddYachtClassDialog extends JDialog {
+public class AddYachtClassDialog extends PersistenceController {
 	
+	JDialog dialog;
 	private YachtClass m_yachtClass;
 	private YachtClasses m_yachtClasses;
 	private final JPanel contentPanel = new JPanel();
@@ -35,14 +37,16 @@ public class AddYachtClassDialog extends JDialog {
 	private JTextField textField_2;
 	
 	public AddYachtClassDialog(YachtClass yachtClass, YachtClasses yachtClasses){
+		super(new JDialog());
+		dialog = (JDialog)getView();
 		m_yachtClass = yachtClass;
 		m_yachtClasses = yachtClasses;
 		
-		setBounds(150, 150, 500, 400);
-		setTitle("Add New Yacht Class");
-		getContentPane().setLayout(new BorderLayout());
+		dialog.setBounds(150, 150, 500, 400);
+		dialog.setTitle("Add New Yacht Class");
+		dialog.getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		dialog.getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
 		gbl_contentPanel.columnWidths = new int[]{0, 0, 0, 0, 0};
 		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -108,24 +112,24 @@ public class AddYachtClassDialog extends JDialog {
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			dialog.getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				okButton = new JButton("OK");
 				okButton.setActionCommand("OK");
 				okButton.addActionListener(new ActionListener() {
 			            public void actionPerformed(ActionEvent ae) {
-			            	setVisible(false);
+			            	dialog.setVisible(false);
 			            }
 			        });
 				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				dialog.getRootPane().setDefaultButton(okButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 		            public void actionPerformed(ActionEvent ae) {
 		            	cancelActionPerformed();
-		            	setVisible(false);
+		            	dialog.setVisible(false);
 		            }
 		        });
 				cancelButton.setActionCommand("Cancel");

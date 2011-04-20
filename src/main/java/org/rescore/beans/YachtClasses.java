@@ -10,7 +10,6 @@ public class YachtClasses extends AbstractModelObject {
 		List<YachtClass> oldValue = yachtClasses;
 		yachtClasses = new ArrayList<YachtClass>(yachtClasses);
 		yachtClasses.add(yachtClass);
-		System.out.println("added new");
 		firePropertyChange("yachtClasses", oldValue, yachtClasses);
 	}
 

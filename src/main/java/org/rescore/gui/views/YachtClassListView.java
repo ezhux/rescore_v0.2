@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -13,6 +14,7 @@ import org.rescore.beans.YachtClass;
 import org.rescore.beans.YachtClasses;
 import org.rescore.dao.DAOFactory;
 import org.rescore.dao.YachtClassDAO;
+import org.rescore.framework.PersistenceController;
 import org.rescore.persitence.HibernateUtil;
 import org.jdesktop.beansbinding.BeanProperty;
 import java.util.List;
@@ -20,14 +22,17 @@ import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 
-public class YachtClassListView extends JPanel {
+public class YachtClassListView extends PersistenceController {
 
+	JPanel panel;
 	private JTable yachtClassTable;
 	private JButton button;
 	private YachtClasses yachtClasses = new YachtClasses();
 	
 	public YachtClassListView(){
-
+		super(new JPanel());
+		panel = (JPanel)getView();
+		
 		yachtClasses = new YachtClasses();
 		
 		HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
@@ -43,17 +48,17 @@ public class YachtClassListView extends JPanel {
 		JScrollPane scrollPane = new JScrollPane(yachtClassTable);
 		yachtClassTable.setFillsViewportHeight(true);
 		button = new JButton("Add New Yacht Class");
-		this.add(BorderLayout.CENTER, scrollPane);
+		panel.add(BorderLayout.CENTER, scrollPane);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				YachtClass newYachtClass = new YachtClass();
 				yachtClasses.addYachtClass(newYachtClass);
 				newYachtClass.setCoefficient(2.0f);
 				AddYachtClassDialog dialog = new AddYachtClassDialog(newYachtClass, yachtClasses);
-				dialog.setVisible(true);
+				((JDialog)dialog.getView()).setVisible(true);
 			}
 		});
-        this.add(BorderLayout.SOUTH, button);
+        panel.add(BorderLayout.SOUTH, button);
         initDataBindings();
     }
 	
