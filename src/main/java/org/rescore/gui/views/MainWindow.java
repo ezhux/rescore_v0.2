@@ -10,9 +10,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.hibernate.SessionFactory;
-import org.rescore.beans.YachtClass;
-
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 
@@ -121,7 +118,7 @@ public class MainWindow implements ActionListener {
         legsCard.add(new JTextField("TextField3", 20));
         
         JPanel yachtsCard = new JPanel();
-        yachtsCard.add(new YachtListView());
+//        yachtsCard.add(new YachtListView());
         
         JPanel modelsCard = new JPanel();
         modelsCard.add(new YachtClassListView());
@@ -137,14 +134,14 @@ public class MainWindow implements ActionListener {
 	}
 	
 	 private void addNewYachtActionPerformed(ActionEvent ae){
-	    AddYachtDialog ayDialog = new AddYachtDialog();
-	    ayDialog.setVisible(true);
+//	    AddYachtDialog ayDialog = new AddYachtDialog();
+//	    ayDialog.setVisible(true);
 	 }
 
 	 private void addNewYachtClassActionPerformed(ActionEvent ae){
-		 	YachtClass newYachtClass = new YachtClass();
-		    AddYachtClassDialog aycDialog = new AddYachtClassDialog(newYachtClass);
-		    aycDialog.setVisible(true);
+//		 	YachtClass newYachtClass = new YachtClass();
+//		    AddYachtClassDialog aycDialog = new AddYachtClassDialog(newYachtClass);
+//		    aycDialog.setVisible(true);
 		 }
 	 
 	 private void listYachtsActionPerformed(ActionEvent ae){

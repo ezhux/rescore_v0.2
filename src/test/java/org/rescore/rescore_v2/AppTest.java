@@ -10,7 +10,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
-import org.rescore.domain.YachtClass;
+import org.rescore.beans.YachtClass;
 import org.rescore.persitence.HibernateUtil;
 
 public class AppTest {

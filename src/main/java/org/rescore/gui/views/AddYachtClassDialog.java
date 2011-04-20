@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import org.rescore.beans.YachtClass;
+import org.rescore.beans.YachtClasses;
 
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -26,14 +27,17 @@ import org.jdesktop.beansbinding.AutoBinding.UpdateStrategy;
 public class AddYachtClassDialog extends JDialog {
 	
 	private YachtClass m_yachtClass;
+	private YachtClasses m_yachtClasses;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
 	private JTextField textField_1;
-	public JButton okButton;
+	private JButton okButton;
 	private JTextField textField_2;
 	
-	public AddYachtClassDialog(YachtClass yachtClass){
+	public AddYachtClassDialog(YachtClass yachtClass, YachtClasses yachtClasses){
 		m_yachtClass = yachtClass;
+		m_yachtClasses = yachtClasses;
+		
 		setBounds(150, 150, 500, 400);
 		setTitle("Add New Yacht Class");
 		getContentPane().setLayout(new BorderLayout());
@@ -120,6 +124,7 @@ public class AddYachtClassDialog extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 		            public void actionPerformed(ActionEvent ae) {
+		            	cancelActionPerformed();
 		            	setVisible(false);
 		            }
 		        });
@@ -145,6 +150,11 @@ public class AddYachtClassDialog extends JDialog {
 	public void setTextField_1(JTextField textField_1) {
 		this.textField_1 = textField_1;
 	}
+	
+	private void cancelActionPerformed(){
+		m_yachtClasses.removeYachtClass(m_yachtClass);
+	}
+
 	protected void initDataBindings() {
 		BeanProperty<YachtClass, String> yachtClassBeanProperty = BeanProperty.create("name");
 		BeanProperty<JTextField, String> jTextFieldBeanProperty = BeanProperty.create("text");
@@ -161,4 +171,5 @@ public class AddYachtClassDialog extends JDialog {
 		AutoBinding<YachtClass, Integer, JTextField, String> autoBinding_2 = Bindings.createAutoBinding(UpdateStrategy.READ_WRITE, m_yachtClass, yachtClassBeanProperty_2, textField_2, jTextFieldBeanProperty_2);
 		autoBinding_2.bind();
 	}
+
 }

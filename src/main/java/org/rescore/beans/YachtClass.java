@@ -1,7 +1,17 @@
 package org.rescore.beans;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
+@Table(name="YACHTCLASSES")
 public class YachtClass extends AbstractModelObject {
 
+	private static final long serialVersionUID = 1L;
+	
+	private Integer id;
 	private String name;
 	private String notes;
 	private float coefficient;
@@ -27,6 +37,16 @@ public class YachtClass extends AbstractModelObject {
 		this.waterlineLength = waterlineLength;
 		this.sailAreaDownwind = sailAreaDownwind;
 		this.sailAreaUpwind = sailAreaUpwind;
+	}
+	
+	@Id
+    @GeneratedValue
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	public String getName() {

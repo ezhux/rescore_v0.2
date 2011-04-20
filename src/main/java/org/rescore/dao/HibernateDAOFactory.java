@@ -2,7 +2,7 @@ package org.rescore.dao;
 
 import org.hibernate.Session;
 import org.rescore.domain.Yacht;
-import org.rescore.domain.YachtClass;
+import org.rescore.beans.YachtClass;
 import org.rescore.persitence.HibernateUtil;
 
 public class HibernateDAOFactory extends DAOFactory {

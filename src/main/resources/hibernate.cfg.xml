@@ -16,9 +16,12 @@
 		<!--
 			<property name="hibernate.hbm2ddl.auto">create</property>
 		 -->
+		<!-- 
+			<property name="hibernate.connection.autocommit" value="true"/>
+		 --> 
 		<property name="hibernate.dialect">org.hibernate.dialect.H2Dialect</property>
 		<property name="hibernate.current_session_context_class">org.hibernate.context.ThreadLocalSessionContext</property>
         <mapping class="org.rescore.domain.Yacht"></mapping>
-        <mapping class="org.rescore.domain.YachtClass"></mapping>
+        <mapping class="org.rescore.beans.YachtClass"></mapping>
     </session-factory>
 </hibernate-configuration>

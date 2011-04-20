@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.rescore.beans.YachtClass;
+
 @Entity
 @Table(name="YACHTS")
 public class Yacht implements java.io.Serializable  {

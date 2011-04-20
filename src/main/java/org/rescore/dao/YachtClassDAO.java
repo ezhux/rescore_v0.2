@@ -1,6 +1,6 @@
 package org.rescore.dao;
 
-import org.rescore.domain.YachtClass;
+import org.rescore.beans.YachtClass;
 
 public interface YachtClassDAO extends GenericDAO<YachtClass, Long> {
 

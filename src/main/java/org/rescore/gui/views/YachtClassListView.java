@@ -34,12 +34,8 @@ public class YachtClassListView extends JPanel {
     	DAOFactory factory = DAOFactory.instance(DAOFactory.HIBERNATE);
     	YachtClassDAO yachtClassDAO = factory.getYachtClassDAO();
     	
-    	List<org.rescore.domain.YachtClass> domainYachtClasses = yachtClassDAO.findAll();
-		for(org.rescore.domain.YachtClass domainYachtClass : domainYachtClasses){
-			org.rescore.beans.YachtClass yachtClass = new org.rescore.beans.YachtClass();
-			yachtClass.setName(domainYachtClass.getName());
-			yachtClass.setCoefficient(domainYachtClass.getCoefficient());
-			yachtClass.setDisplacement(domainYachtClass.getDisplacement());
+    	List<YachtClass> domainYachtClasses = yachtClassDAO.findAll();
+		for(YachtClass yachtClass : domainYachtClasses){
 			yachtClasses.addYachtClass(yachtClass);
 		}
 		
@@ -53,7 +49,7 @@ public class YachtClassListView extends JPanel {
 				YachtClass newYachtClass = new YachtClass();
 				yachtClasses.addYachtClass(newYachtClass);
 				newYachtClass.setCoefficient(2.0f);
-				AddYachtClassDialog dialog = new AddYachtClassDialog(newYachtClass);
+				AddYachtClassDialog dialog = new AddYachtClassDialog(newYachtClass, yachtClasses);
 				dialog.setVisible(true);
 			}
 		});
